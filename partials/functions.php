@@ -9,12 +9,12 @@
     }
   }
 
-  function randomPassword($numder){
-    $charAll = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789@-_.,:;";
+  function randomPassword($number){
+    $charAll = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789@-_.";
     $password = "";
     for($i = 0; $i < $number; $i++){
-      $index = rand(0, strlen($charAll) - 1);
-      $password .= $number[$index];
+      $index = mt_rand(0, strlen($charAll) - 1);
+      $password .= $charAll[$index];
     }
     return $password;
   }

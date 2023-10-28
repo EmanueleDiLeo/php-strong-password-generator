@@ -2,15 +2,18 @@
 
   include __DIR__ . "/partials/functions.php";
   $error_message = '';
+  $password = '';
   if(isset($_POST['pass-leng'])){
-    if(checkLeng("$_POST['pass-leng']")){
-        session_start();
-        $_SESSION["sended_text"] = $_POST['pass-leng'];
-        header("Location: ./postArrive.php");
+    $intLeng = intval(($_POST['pass-leng']));
+    if(checkLeng($intLeng)){
+      $password = randomPassword($intLeng);
+      session_start();
+      $_SESSION["sended_text"] = $password;
+      header("Location: ./postArrive.php");
     }
     else{
-      $error_message = 'ERRORE! ';
-    }
+     $error_message = 'ERRORE! ';
+   }
   }
 
 
@@ -32,7 +35,7 @@
     <div>
       <form action="index.php" method="post">
         <label class="form-label">Lunghezza password:</label>
-        <input class="form-control" type="number" name="pass-leng" value="8">
+        <input class="form-control mb-3" type="number" name="pass-leng" value="8">
         <button class="btn btn-primary">Invia</button>
         <!-- <button class="btn btn-secondary">Annulla</button> -->
       </form>
