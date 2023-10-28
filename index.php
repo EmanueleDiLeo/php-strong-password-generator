@@ -1,21 +1,43 @@
 <?php
 
+  include __DIR__ . "/partials/functions.php";
+  $error_message = '';
+  if(isset($_POST['pass-leng'])){
+    if(checkLeng("$_POST['pass-leng']")){
+        session_start();
+        $_SESSION["sended_text"] = $_POST['pass-leng'];
+        header("Location: ./postArrive.php");
+    }
+    else{
+      $error_message = 'ERRORE! ';
+    }
+  }
+
+
+
+
+  include __DIR__ . "/partials/head.php";
 ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
-  <title>PHP Strong Password Generator</title>
-</head>
 <body>
+
+  <div class="container">
+    <h1>Strong Password Generator</h1>
+    <h4>Genera una password sicura</h4>
+    <div>
+      <p><?php echo $error_message ?>Scegliere una password con un minimo di 8 caratteri e massimo di 32 caratteri</p>
+    </div>
+    <div>
+      <form action="index.php" method="post">
+        <label class="form-label">Lunghezza password:</label>
+        <input class="form-control" type="number" name="pass-leng" value="8">
+        <button class="btn btn-primary">Invia</button>
+        <!-- <button class="btn btn-secondary">Annulla</button> -->
+      </form>
+    </div>
+  </div>
   
 </body>
 </html>
